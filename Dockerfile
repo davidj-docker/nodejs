@@ -1,9 +1,18 @@
-FROM node:5.0.0
+FROM ubuntu:trusty
+
+RUN ln -snf /bin/bash /bin/sh
+
+# Replace apt sources.list to fetch packages from AWS EC2
+RUN sed -i 's/archive.ubuntu.com/us-east-1.ec2.archive.ubuntu.com/' /etc/apt/sources.list
+
+# Update and upgrade system
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs npm
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
-ENTRYPOINT ["sh", "/usr/src/bot.sh"]
+ENTRYPOINT ["sh", "bot.sh"]
