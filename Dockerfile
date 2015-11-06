@@ -10,6 +10,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninter
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs npm
 
+RUN DEBIAN_FRONTEND=noninteractive update-alternatives --install /usr/bin/node node /usr/bin/nodejs 99
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
