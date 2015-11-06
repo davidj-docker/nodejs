@@ -5,4 +5,5 @@ WORKDIR /usr/src/app
 
 EXPOSE 8080
 
+CMD [ "npm", "start" ]
 ENTRYPOINT ["sh", "/usr/src/bot.sh"]
